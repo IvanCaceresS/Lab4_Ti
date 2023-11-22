@@ -134,6 +134,10 @@ desviacion_shadowing1 = std(shadowing1);
 media_shadowing2 = mean(shadowing2);
 desviacion_shadowing2 = std(shadowing2);
 
+% Calcular media y desviación estándar del shadowing combinado
+media_shadowing_combinado = mean(shadowing_combined);
+desviacion_shadowing_combinado = std(shadowing_combined);
+
 % Cálculo de CDF para shadowing
 [f1, x1_cdf] = ecdf(shadowing1);
 [f2, x2_cdf] = ecdf(shadowing2);
@@ -194,3 +198,7 @@ fprintf('\nResultados para Lab 4:\n');
 fprintf('Pendiente de la curva de mejor ajuste: %.2f\n', pendiente2);
 fprintf('Media del Shadowing: %.2f dB\n', media_shadowing2);
 fprintf('Desviación estándar del Shadowing: %.2f dB\n', desviacion_shadowing2);
+% Mostrar en consola los resultados combinados
+fprintf('\nResultados Combinados (Lab 3 + Lab 4):\n');
+fprintf('Media del Shadowing: %.2f dB\n', media_shadowing_combinado);
+fprintf('Desviación estándar del Shadowing: %.2f dB\n', desviacion_shadowing_combinado);
