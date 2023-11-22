@@ -113,6 +113,10 @@ y2 = datos2(:, 2);
 p1 = polyfit(x1, y1, 1);
 p2 = polyfit(x2, y2, 1);
 
+% Calcula la pendiente (coeficiente lineal) de cada ajuste
+pendiente1 = p1(1);
+pendiente2 = p2(1);
+
 % Crear línea de ajuste
 x1_fit = linspace(min(x1), max(x1), 100);
 y1_fit = polyval(p1, x1_fit);
@@ -123,6 +127,12 @@ y2_fit = polyval(p2, x2_fit);
 shadowing1 = y1 - polyval(p1, x1);
 shadowing2 = y2 - polyval(p2, x2);
 shadowing_combined = [shadowing1; shadowing2];
+
+% Calcular media y desviación estándar del shadowing
+media_shadowing1 = mean(shadowing1);
+desviacion_shadowing1 = std(shadowing1);
+media_shadowing2 = mean(shadowing2);
+desviacion_shadowing2 = std(shadowing2);
 
 % Cálculo de CDF para shadowing
 [f1, x1_cdf] = ecdf(shadowing1);
@@ -162,3 +172,25 @@ grid on;
 % Mostrar ecuaciones de ajuste en consola
 fprintf('Ecuación de ajuste Lab 3: y = %.2fx + %.2f\n', p1);
 fprintf('Ecuación de ajuste Lab 4: y = %.2fx + %.2f\n', p2);
+% Mostrar path loss y shadowing correspondiente en consola para datos1
+fprintf('Path Loss y Shadowing para datos1:\n');
+for i = 1:length(shadowing1)
+    fprintf('Path Loss: %.2f dB, Shadowing: %.4f dB\n', y1(i), shadowing1(i));
+end
+
+% Mostrar path loss y shadowing correspondiente en consola para datos2
+fprintf('\nPath Loss y Shadowing para datos2:\n');
+for i = 1:length(shadowing2)
+    fprintf('Path Loss: %.2f dB, Shadowing: %.4f dB\n', y2(i), shadowing2(i));
+end
+
+% Mostrar en consola los resultados
+fprintf('Resultados para Lab 3:\n');
+fprintf('Pendiente de la curva de mejor ajuste: %.2f\n', pendiente1);
+fprintf('Media del Shadowing: %.2f dB\n', media_shadowing1);
+fprintf('Desviación estándar del Shadowing: %.2f dB\n', desviacion_shadowing1);
+
+fprintf('\nResultados para Lab 4:\n');
+fprintf('Pendiente de la curva de mejor ajuste: %.2f\n', pendiente2);
+fprintf('Media del Shadowing: %.2f dB\n', media_shadowing2);
+fprintf('Desviación estándar del Shadowing: %.2f dB\n', desviacion_shadowing2);
